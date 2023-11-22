@@ -21,7 +21,7 @@ const api = (() => {
   }
 
   async function register({ name, email, password }) {
-    const response = await fetch(`${BASE_URL}/users`, {
+    const response = await fetch(`${BASE_URL}/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -104,21 +104,21 @@ const api = (() => {
 
   // CONTENTS SECTION
 
-  // async function getAllTalks() {
-  //   const response = await fetch(`${BASE_URL}/talks`);
+  async function getAllThreads() {
+    const response = await fetch(`${BASE_URL}/threads`);
 
-  //   const responseJson = await response.json();
+    const responseJson = await response.json();
 
-  //   const { status, message } = responseJson;
+    const { status, message } = responseJson;
 
-  //   if (status !== 'success') {
-  //     throw new Error(message);
-  //   }
+    if (status !== 'success') {
+      throw new Error(message);
+    }
 
-  //   const { data: { talks } } = responseJson;
+    const { data: { threads } } = responseJson;
 
-  //   return talks;
-  // }
+    return threads;
+  }
 
   // async function getTalkDetail(id) {
   //   const response = await fetch(`${BASE_URL}/talks/${id}`);
@@ -188,7 +188,7 @@ const api = (() => {
     login,
     getOwnProfile,
     getAllUsers,
-    // getAllTalks,
+    getAllThreads,
     // createTalk,
     // toggleLikeTalk,
     // getTalkDetail,
