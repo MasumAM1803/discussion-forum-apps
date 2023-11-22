@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { asyncPopulateUsersAndThreads } from '../states/shared/action';
+import List from '../components/thread/List';
 
 function HomePage() {
   const {
@@ -27,15 +28,15 @@ function HomePage() {
 
   const threadList = threads.map((thread) => ({
     ...thread,
-    user: users.find((user) => user.id === thread.user),
+    user: users.find((user) => user.id === thread.ownerId),
     authUser: authUser.id,
   }));
-
-  console.log(threadList);
+  console.log('data: ', threadList);
 
   return (
     <section className="home-page">
-      <p>Thread</p>
+      {/* <p>Thread</p> */}
+      <List threads={threadList} />
     </section>
   );
 }
