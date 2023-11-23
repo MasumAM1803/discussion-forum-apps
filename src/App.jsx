@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Router from './route/Router';
+import Loading from './components/Loading';
 import LoginPage from './pages/auth/Login';
 import RegisterPage from './pages/auth/Register';
 import { asyncPreloadProcess } from './states/isPreload/action';
@@ -30,7 +31,7 @@ function App() {
   if (authUser === null) {
     return (
       <>
-        {/* <Loading /> */}
+        <Loading />
         <main>
           <Routes>
             <Route path="/*" element={<LoginPage />} />
@@ -42,15 +43,18 @@ function App() {
   }
 
   return (
-    <div className="app-container">
-      <header>
-        <Link to="/">Home</Link>
-        <button type="button" onClick={onSignOut}>Sign out</button>
-      </header>
-      <main>
-        <Router />
-      </main>
-    </div>
+    <>
+      <Loading />
+      <div className="app-container">
+        <header>
+          <Link to="/">Home</Link>
+          <button type="button" onClick={onSignOut}>Sign out</button>
+        </header>
+        <main>
+          <Router />
+        </main>
+      </div>
+    </>
   );
 }
 
