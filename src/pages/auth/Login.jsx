@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable import/named */
 import React from 'react';
 import { IoEarthOutline } from 'react-icons/io5';
 import { Link, Navigate } from 'react-router-dom';

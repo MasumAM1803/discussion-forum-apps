@@ -31,7 +31,6 @@ function HomePage() {
     user: users.find((user) => user.id === thread.ownerId),
     authUser: authUser.id,
   }));
-  console.log('data: ', threadList);
 
   return (
     <section className="home-page">
