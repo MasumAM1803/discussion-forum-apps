@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable no-nested-ternary */
 import { ActionType } from './action';
 
 function threadsReducer(threads = [], action = {}) {
@@ -12,9 +14,11 @@ function threadsReducer(threads = [], action = {}) {
           return {
             ...thread,
             upVotesBy: thread.upVotesBy.includes(action.payload.userId)
-              ? thread.upVotesBy.filter((id) => id !== action.payload.userId)
+              ? thread.upVotesBy.filter((id) => id === action.payload.userId)
               : thread.upVotesBy.concat([action.payload.userId]),
-            downVotesBy: [],
+            downVotesBy: thread.downVotesBy.includes(action.payload.userId)
+              ? thread.downVotesBy.filter((id) => id !== action.payload.userId)
+              : thread.downVotesBy,
           };
         }
         return thread;
@@ -24,7 +28,9 @@ function threadsReducer(threads = [], action = {}) {
         if (thread.id === action.payload.threadId) {
           return {
             ...thread,
-            upVotesBy: [],
+            upVotesBy: thread.upVotesBy.includes(action.payload.userId)
+              ? thread.upVotesBy.filter((id) => id !== action.payload.userId)
+              : thread.upVotesBy,
             downVotesBy: thread.downVotesBy.includes(action.payload.userId)
               ? thread.downVotesBy.filter((id) => id !== action.payload.userId)
               : thread.downVotesBy.concat([action.payload.userId]),
@@ -34,11 +40,16 @@ function threadsReducer(threads = [], action = {}) {
       });
     case ActionType.NEUTRAL_VOTE_THREAD:
       return threads.map((thread) => {
+        // console.log(thread.upVotesBy);
         if (thread.id === action.payload.threadId) {
           return {
             ...thread,
-            upVotesBy: [],
-            downVotesBy: [],
+            upVotesBy: thread.upVotesBy.includes(action.payload.userId)
+              ? thread.upVotesBy.filter((id) => id !== action.payload.userId)
+              : thread.upVotesBy,
+            downVotesBy: thread.downVotesBy.includes(action.payload.userId)
+              ? thread.downVotesBy.filter((id) => id !== action.payload.userId)
+              : thread.downVotesBy,
           };
         }
         return thread;

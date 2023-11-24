@@ -18,11 +18,13 @@ function Item({
 
   const onUpVoteClick = (event) => {
     event.stopPropagation();
+    console.log(isUpVoteThread);
     isUpVoteThread ? neutralVote(id) : upVote(id);
   };
 
   const onDownVoteClick = (event) => {
     event.stopPropagation();
+    console.log(isDownVoteThread);
     isDownVoteThread ? neutralVote(id) : downVote(id);
   };
 
