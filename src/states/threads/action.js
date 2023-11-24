@@ -24,15 +24,15 @@ function receiveThreadsActionCreator(threads) {
 //   };
 // }
 
-// function toggleLikeTalkActionCreator({ threadId, userId }) {
-//   return {
-//     type: ActionType.TOGGLE_LIKE_THREAD,
-//     payload: {
-//       threadId,
-//       userId,
-//     },
-//   };
-// }
+function toggleLikeTalkActionCreator({ threadId, userId }) {
+  return {
+    type: ActionType.TOGGLE_LIKE_THREAD,
+    payload: {
+      threadId,
+      userId,
+    },
+  };
+}
 
 // function asyncAddTalk({ text, replyTo = '' }) {
 //   return async (dispatch) => {

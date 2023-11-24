@@ -3,31 +3,22 @@ import PropTypes from 'prop-types';
 import {
   FaRegThumbsDown, FaRegThumbsUp,
 } from 'react-icons/fa';
-import Comment from './Comment';
 import { postedAt } from '../../utils';
 
-function Detail({
+function Comment({
   // id, title, body, category, createdAt, upVotesBy, downVotesBy, comments, user,
-  id, title, body, category, createdAt, owner, upVotesBy, downVotesBy, comments,
+  content, createdAt, owner, upVotesBy, downVotesBy,
 }) {
   // const isThreadLiked = likes.includes(authUser);
 
   return (
     <section className="thread-detail">
-      <header style={{ display: 'block' }}>
-        <div style={{
-          padding: '4px 5px', border: '1px solid black', borderRadius: '5px', width: 'fit-content',
-        }}
-        >
-          {category}
-        </div>
-        <a href={`/threads/${id}`} className="thread-item__user-name">
-          <h4 className="">{title}</h4>
-        </a>
+      <header style={{ display: 'flex' }}>
+        <h4>{owner.name}</h4>
       </header>
       <article>
         <p className="thread-item__text">
-          {body.replace(/<[^>]+>/g, '').substring(0, 200)}
+          {content.replace(/<[^>]+>/g, '').substring(0, 200)}
           {/* {extractContent(body)} */}
         </p>
         <div style={{ display: 'flex', gap: '20px' }}>
@@ -41,26 +32,9 @@ function Detail({
             {' '}
             {downVotesBy.length}
           </div>
-          {/* <div>
-            <FaRegCommentDots />
-            {' '}
-            {totalComments}
-          </div> */}
           <div>{postedAt(createdAt)}</div>
-          <div>
-            Dibuat oleh
-            {' '}
-            <strong>{owner.name}</strong>
-          </div>
         </div>
       </article>
-      <section>
-        {
-         comments.map((comment) => (
-           <Comment key={comment.id} {...comment} />
-         ))
-      }
-      </section>
     </section>
   );
 }
@@ -71,17 +45,14 @@ const userShape = {
   avatar: PropTypes.string.isRequired,
 };
 
-Detail.propTypes = {
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
+Comment.propTypes = {
+//   id: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   owner: PropTypes.shape(userShape).isRequired,
-  comments: PropTypes.arrayOf(PropTypes.object).isRequired,
   upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   // authUser: PropTypes.string.isRequired,
 };
 
-export default Detail;
+export default Comment;
