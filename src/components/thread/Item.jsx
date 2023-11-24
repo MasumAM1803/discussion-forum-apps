@@ -15,8 +15,6 @@ function Item({
   // const navigate = useNavigate();
   const isUpVoteThread = upVotesBy.includes(authUser);
   const isDownVoteThread = downVotesBy.includes(authUser);
-  // let upVoteLength = upVotesBy.length;
-  // let downVoteLength = downVotesBy.length;
 
   const onUpVoteClick = (event) => {
     event.stopPropagation();
@@ -65,9 +63,7 @@ function Item({
               </button>
               {' '}
               {
-                isDownVoteThread
-                  ? upVotesBy.length === 0 ? upVotesBy.length : upVotesBy.length - 1
-                  : upVotesBy.length === 0 ? upVotesBy.length + 1 : upVotesBy.length
+                upVotesBy.length
               }
             </div>
             <div>
@@ -77,9 +73,7 @@ function Item({
               {' '}
               {/* {downVotesBy.length} */}
               {
-                isUpVoteThread
-                  ? downVotesBy.length === 0 ? downVotesBy.length : downVotesBy.length - 1
-                  : downVotesBy.length === 0 ? downVotesBy.length + 1 : downVotesBy.length
+                downVotesBy.length
               }
               {/* { isUpVoteThread ? downVotesBy.length - 1 : downVotesBy.length} */}
             </div>
