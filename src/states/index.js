@@ -5,7 +5,7 @@ import authUserReducer from './authUser/reducer';
 import usersReducer from './users/reducer';
 import threadsReducer from './threads/reducer';
 import isPreloadReducer from './isPreload/reducer';
-// import talkDetailReducer from './talkDetail/reducer';
+import threadDetailReducer from './threadDetail/reducer';
 
 const store = configureStore({
   reducer: {
@@ -13,7 +13,7 @@ const store = configureStore({
     isPreload: isPreloadReducer,
     users: usersReducer,
     threads: threadsReducer,
-    // talkDetail: talkDetailReducer,
+    detailThread: threadDetailReducer,
     loadingBar: loadingBarReducer,
   },
 });

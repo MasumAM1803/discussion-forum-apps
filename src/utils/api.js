@@ -120,24 +120,24 @@ const api = (() => {
     return threads;
   }
 
-  // async function getTalkDetail(id) {
-  //   const response = await fetch(`${BASE_URL}/talks/${id}`);
+  async function getThreadDetail(id) {
+    const response = await fetch(`${BASE_URL}/threads/${id}`);
 
-  //   const responseJson = await response.json();
+    const responseJson = await response.json();
 
-  //   const { status, message } = responseJson;
+    const { status, message } = responseJson;
 
-  //   if (status !== 'success') {
-  //     throw new Error(message);
-  //   }
+    if (status !== 'success') {
+      throw new Error(message);
+    }
 
-  //   const { data: { talkDetail } } = responseJson;
+    const { data: { detailThread } } = responseJson;
 
-  //   return talkDetail;
-  // }
+    return detailThread;
+  }
 
-  // async function createTalk({ text, replyTo = '' }) {
-  //   const response = await _fetchWithAuth(`${BASE_URL}/talks`, {
+  // async function createThread({ text, replyTo = '' }) {
+  //   const response = await _fetchWithAuth(`${BASE_URL}/threads`, {
   //     method: 'POST',
   //     headers: {
   //       'Content-Type': 'application/json',
@@ -156,19 +156,19 @@ const api = (() => {
   //     throw new Error(message);
   //   }
 
-  //   const { data: { talk } } = responseJson;
+  //   const { data: { thread } } = responseJson;
 
-  //   return talk;
+  //   return thread;
   // }
 
-  // async function toggleLikeTalk(id) {
-  //   const response = await _fetchWithAuth(`${BASE_URL}/talks/likes`, {
+  // async function toggleLikeThread(id) {
+  //   const response = await _fetchWithAuth(`${BASE_URL}/threads/likes`, {
   //     method: 'POST',
   //     headers: {
   //       'Content-Type': 'application/json',
   //     },
   //     body: JSON.stringify({
-  //       talkId: id,
+  //       threadId: id,
   //     }),
   //   });
 
@@ -189,9 +189,9 @@ const api = (() => {
     getOwnProfile,
     getAllUsers,
     getAllThreads,
-    // createTalk,
-    // toggleLikeTalk,
-    // getTalkDetail,
+    // createThread,
+    // toggleLikeThread,
+    getThreadDetail,
   };
 })();
 

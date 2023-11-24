@@ -7,20 +7,9 @@ import { FaRegThumbsUp, FaRegThumbsDown, FaRegCommentDots } from 'react-icons/fa
 import { postedAt } from '../../utils';
 
 function Item({
-  // id, title, body, createdAt, likes, user, authUser, like,
-  title, body, category, createdAt, ownerId, upVotesBy, downVotesBy, totalComments, user, authUser,
+  // id, title, body, category, createdAt, ownerId, upVotesBy, downVotesBy, totalComments, user, authUser,
+  id, title, body, category, createdAt, upVotesBy, downVotesBy, totalComments, user,
 }) {
-  function extractContent(s, space) {
-    const span = document.createElement('span');
-    span.innerHTML = s;
-    if (space) {
-      const children = span.querySelectorAll('*');
-      for (let i = 0; i < children.length; i++) {
-        if (children[i].textContent) { children[i].textContent += ' '; } else { children[i].innerText += ' '; }
-      }
-    }
-    return [span.textContent || span.innerText].toString().replace(/ +/g, ' ');
-  }
   // const navigate = useNavigate();
   // const isThreadLiked = likes.includes(authUser);
 
@@ -50,7 +39,7 @@ function Item({
           >
             {category}
           </div>
-          <a href="#" className="thread-item__user-name">
+          <a href={`/threads/${id}`} className="thread-item__user-name">
             <h4 className="">{title}</h4>
           </a>
         </header>
@@ -89,16 +78,21 @@ function Item({
 }
 
 const userShape = {
-  id: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  photo: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
 };
 
 const threadItemShape = {
   id: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
-  likes: PropTypes.arrayOf(PropTypes.string).isRequired,
+  ownerId: PropTypes.string.isRequired,
+  totalComments: PropTypes.number.isRequired,
+  upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
+  downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   authUser: PropTypes.string.isRequired,
   user: PropTypes.shape(userShape).isRequired,
 };

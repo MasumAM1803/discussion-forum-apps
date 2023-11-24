@@ -13,7 +13,6 @@ function HomePage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // @TODO: dispatch async action to populate talks and users data
     dispatch(asyncPopulateUsersAndThreads());
   }, [dispatch]);
 
@@ -34,7 +33,6 @@ function HomePage() {
 
   return (
     <section className="home-page">
-      {/* <p>Thread</p> */}
       <List threads={threadList} />
     </section>
   );
