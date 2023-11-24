@@ -161,25 +161,56 @@ const api = (() => {
   //   return thread;
   // }
 
-  // async function toggleLikeThread(id) {
-  //   const response = await _fetchWithAuth(`${BASE_URL}/threads/likes`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       threadId: id,
-  //     }),
-  //   });
+  async function upVoteThread(id) {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads/${id}/up-vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-  //   const responseJson = await response.json();
+    const responseJson = await response.json();
 
-  //   const { status, message } = responseJson;
+    const { status, message, data } = responseJson;
 
-  //   if (status !== 'success') {
-  //     throw new Error(message);
-  //   }
-  // }
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+  }
+
+  async function downVoteThread(id) {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads/${id}/down-vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+  }
+
+  async function neutralVoteThread(id) {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads/${id}/neutral-vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+  }
 
   return {
     putAccessToken,
@@ -190,8 +221,10 @@ const api = (() => {
     getAllUsers,
     getAllThreads,
     // createThread,
-    // toggleLikeThread,
     getThreadDetail,
+    upVoteThread,
+    downVoteThread,
+    neutralVoteThread,
   };
 })();
 

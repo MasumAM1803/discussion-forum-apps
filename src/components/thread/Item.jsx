@@ -1,3 +1,5 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable no-unused-expressions */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable max-len */
 import React from 'react';
@@ -7,16 +9,24 @@ import { FaRegThumbsUp, FaRegThumbsDown, FaRegCommentDots } from 'react-icons/fa
 import { postedAt } from '../../utils';
 
 function Item({
-  // id, title, body, category, createdAt, ownerId, upVotesBy, downVotesBy, totalComments, user, authUser,
-  id, title, body, category, createdAt, upVotesBy, downVotesBy, totalComments, user,
+  // id, title, body, category, createdAt, upVotesBy, ownerId, downVotesBy, totalComments, user, upVote, downVote, neutralVote
+  id, title, body, category, createdAt, upVotesBy, downVotesBy, totalComments, user, upVote, downVote, neutralVote, authUser,
 }) {
   // const navigate = useNavigate();
-  // const isThreadLiked = likes.includes(authUser);
+  const isUpVoteThread = upVotesBy.includes(authUser);
+  const isDownVoteThread = downVotesBy.includes(authUser);
+  // let upVoteLength = upVotesBy.length;
+  // let downVoteLength = downVotesBy.length;
 
-  // const onLikeClick = (event) => {
-  //   event.stopPropagation();
-  //   like(id);
-  // };
+  const onUpVoteClick = (event) => {
+    event.stopPropagation();
+    isUpVoteThread ? neutralVote(id) : upVote(id);
+  };
+
+  const onDownVoteClick = (event) => {
+    event.stopPropagation();
+    isDownVoteThread ? neutralVote(id) : downVote(id);
+  };
 
   // const onThreadClick = () => {
   //   navigate(`/threads/${id}`);
@@ -50,14 +60,28 @@ function Item({
           </p>
           <div style={{ display: 'flex', gap: '20px' }}>
             <div>
-              <FaRegThumbsUp />
+              <button type="button" onClick={onUpVoteClick} aria-label="up vote">
+                <FaRegThumbsUp />
+              </button>
               {' '}
-              {upVotesBy.length}
+              {
+                isDownVoteThread
+                  ? upVotesBy.length === 0 ? upVotesBy.length : upVotesBy.length - 1
+                  : upVotesBy.length === 0 ? upVotesBy.length + 1 : upVotesBy.length
+              }
             </div>
             <div>
-              <FaRegThumbsDown />
+              <button type="button" onClick={onDownVoteClick} aria-label="down vote">
+                <FaRegThumbsDown />
+              </button>
               {' '}
-              {downVotesBy.length}
+              {/* {downVotesBy.length} */}
+              {
+                isUpVoteThread
+                  ? downVotesBy.length === 0 ? downVotesBy.length : downVotesBy.length - 1
+                  : downVotesBy.length === 0 ? downVotesBy.length + 1 : downVotesBy.length
+              }
+              {/* { isUpVoteThread ? downVotesBy.length - 1 : downVotesBy.length} */}
             </div>
             <div>
               <FaRegCommentDots />
@@ -99,11 +123,15 @@ const threadItemShape = {
 
 Item.propTypes = {
   ...threadItemShape,
-  // like: PropTypes.func,
+  upVote: PropTypes.func,
+  downVote: PropTypes.func,
+  neutralVote: PropTypes.func,
 };
 
 Item.defaultProps = {
-  like: null,
+  upVote: null,
+  downVote: null,
+  neutralVote: null,
 };
 
 export { threadItemShape };

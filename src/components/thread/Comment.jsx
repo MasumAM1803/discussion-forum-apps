@@ -13,8 +13,12 @@ function Comment({
 
   return (
     <section className="thread-detail">
-      <header style={{ display: 'flex' }}>
-        <h4>{owner.name}</h4>
+      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <img src={owner.avatar} alt={owner.name} />
+          <h4>{owner.name}</h4>
+        </div>
+        <div>{postedAt(createdAt)}</div>
       </header>
       <article>
         <p className="thread-item__text">
@@ -32,7 +36,6 @@ function Comment({
             {' '}
             {downVotesBy.length}
           </div>
-          <div>{postedAt(createdAt)}</div>
         </div>
       </article>
     </section>

@@ -1,9 +1,11 @@
-// import api from '../../utils/api';
+import api from '../../utils/api';
 
 const ActionType = {
   RECEIVE_THREADS: 'RECEIVE_THREADS',
   // ADD_THREAD: 'ADD_THREAD',
-  // TOGGLE_LIKE_THREAD: 'TOGGLE_LIKE_THREAD',
+  UP_VOTE_THREAD: 'UP_VOTE_THREAD',
+  DOWN_VOTE_THREAD: 'DOWN_VOTE_THREAD',
+  NEUTRAL_VOTE_THREAD: 'NEUTRAL_VOTE_THREAD',
 };
 
 function receiveThreadsActionCreator(threads) {
@@ -15,7 +17,7 @@ function receiveThreadsActionCreator(threads) {
   };
 }
 
-// function addTalkActionCreator(thread) {
+// function addThreadActionCreator(thread) {
 //   return {
 //     type: ActionType.ADD_THREAD,
 //     payload: {
@@ -24,9 +26,9 @@ function receiveThreadsActionCreator(threads) {
 //   };
 // }
 
-function toggleLikeTalkActionCreator({ threadId, userId }) {
+function upVoteThreadActionCreator({ threadId, userId }) {
   return {
-    type: ActionType.TOGGLE_LIKE_THREAD,
+    type: ActionType.UP_VOTE_THREAD,
     payload: {
       threadId,
       userId,
@@ -34,36 +36,89 @@ function toggleLikeTalkActionCreator({ threadId, userId }) {
   };
 }
 
-// function asyncAddTalk({ text, replyTo = '' }) {
+function downVoteThreadActionCreator({ threadId, userId }) {
+  return {
+    type: ActionType.DOWN_VOTE_THREAD,
+    payload: {
+      threadId,
+      userId,
+    },
+  };
+}
+
+function neutralVoteThreadActionCreator({ threadId, userId }) {
+  return {
+    type: ActionType.NEUTRAL_VOTE_THREAD,
+    payload: {
+      threadId,
+      userId,
+    },
+  };
+}
+
+// function asyncAddThread({ text, replyTo = '' }) {
 //   return async (dispatch) => {
 //     try {
-//       const thread = await api.createTalk({ text, replyTo });
-//       dispatch(addTalkActionCreator(thread));
+//       const thread = await api.createThread({ text, replyTo });
+//       dispatch(addThreadActionCreator(thread));
 //     } catch (error) {
 //       alert(error.message);
 //     }
 //   };
 // }
 
-// function asyncToogleLikeTalk(threadId) {
-//   return async (dispatch, getState) => {
-//     const { authUser } = getState();
-//     dispatch(toggleLikeTalkActionCreator({ threadId, userId: authUser.id }));
+function asyncNeutralVoteThread(threadId) {
+  return async (dispatch, getState) => {
+    const { authUser } = getState();
+    dispatch(neutralVoteThreadActionCreator({ threadId, userId: authUser.id }));
 
-//     try {
-//       await api.toggleLikeTalk(threadId);
-//     } catch (error) {
-//       alert(error.message);
-//       dispatch(toggleLikeTalkActionCreator({ threadId, userId: authUser.id }));
-//     }
-//   };
-// }
+    try {
+      await api.neutralVoteThread(threadId);
+    } catch (error) {
+      alert(error.message);
+      dispatch(neutralVoteThreadActionCreator({ threadId, userId: authUser.id }));
+    }
+  };
+}
+
+function asyncUpVoteThread(threadId) {
+  return async (dispatch, getState) => {
+    const { authUser } = getState();
+    dispatch(upVoteThreadActionCreator({ threadId, userId: authUser.id }));
+
+    try {
+      await api.upVoteThread(threadId);
+    } catch (error) {
+      alert(error.message);
+      // dispatch(neutralVoteThreadActionCreator({ threadId, userId: authUser.id }));
+      dispatch(asyncNeutralVoteThread(threadId));
+    }
+  };
+}
+
+function asyncDownVoteThread(threadId) {
+  return async (dispatch, getState) => {
+    const { authUser } = getState();
+    dispatch(downVoteThreadActionCreator({ threadId, userId: authUser.id }));
+
+    try {
+      await api.downVoteThread(threadId);
+    } catch (error) {
+      alert(error.message);
+      dispatch(asyncNeutralVoteThread(threadId));
+    }
+  };
+}
 
 export {
   ActionType,
   receiveThreadsActionCreator,
-  // addTalkActionCreator,
-  // toggleLikeTalkActionCreator,
-  // asyncAddTalk,
-  // asyncToogleLikeTalk,
+  // addThreadActionCreator,
+  upVoteThreadActionCreator,
+  downVoteThreadActionCreator,
+  neutralVoteThreadActionCreator,
+  // asyncAddThread,
+  asyncUpVoteThread,
+  asyncDownVoteThread,
+  asyncNeutralVoteThread,
 };
