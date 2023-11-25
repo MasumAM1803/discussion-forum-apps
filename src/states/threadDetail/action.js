@@ -4,9 +4,9 @@ const ActionType = {
   RECEIVE_THREAD_DETAIL: 'RECEIVE_THREAD_DETAIL',
   CLEAR_THREAD_DETAIL: 'CLEAR_THREAD_DETAIL',
   ADD_COMMENT: 'ADD_COMMENT',
-  UP_VOTE_THREAD: 'UP_VOTE_THREAD',
-  DOWN_VOTE_THREAD: 'DOWN_VOTE_THREAD',
-  NEUTRAL_VOTE_THREAD: 'NEUTRAL_VOTE_THREAD',
+  UP_VOTE_THREAD_DETAIL: 'UP_VOTE_THREAD_DETAIL',
+  DOWN_VOTE_THREAD_DETAIL: 'DOWN_VOTE_THREAD_DETAIL',
+  NEUTRAL_VOTE_THREAD_DETAIL: 'NEUTRAL_VOTE_THREAD_DETAIL',
   UP_VOTE_COMMENT: 'UP_VOTE_COMMENT',
   DOWN_VOTE_COMMENT: 'DOWN_VOTE_COMMENT',
   NEUTRAL_VOTE_COMMENT: 'NEUTRAL_VOTE_COMMENT',
@@ -38,7 +38,7 @@ function addCommentActionCreator(comment) {
 
 function upVoteThreadActionCreator({ threadId, userId }) {
   return {
-    type: ActionType.UP_VOTE_THREAD,
+    type: ActionType.UP_VOTE_THREAD_DETAIL,
     payload: {
       threadId,
       userId,
@@ -48,7 +48,7 @@ function upVoteThreadActionCreator({ threadId, userId }) {
 
 function downVoteThreadActionCreator({ threadId, userId }) {
   return {
-    type: ActionType.DOWN_VOTE_THREAD,
+    type: ActionType.DOWN_VOTE_THREAD_DETAIL,
     payload: {
       threadId,
       userId,
@@ -58,7 +58,7 @@ function downVoteThreadActionCreator({ threadId, userId }) {
 
 function neutralVoteThreadActionCreator({ threadId, userId }) {
   return {
-    type: ActionType.NEUTRAL_VOTE_THREAD,
+    type: ActionType.NEUTRAL_VOTE_THREAD_DETAIL,
     payload: {
       threadId,
       userId,

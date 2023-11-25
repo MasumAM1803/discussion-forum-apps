@@ -1,14 +1,23 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable max-len */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FaRegThumbsUp, FaRegThumbsDown, FaRegCommentDots } from 'react-icons/fa';
+import { Markup } from 'interweave';
 import { postedAt } from '../../utils';
 
 function Item({
-  id, title, body, category, createdAt, upVotesBy, downVotesBy, totalComments, user, upVote, downVote, neutralVote, authUser,
+  id,
+  title,
+  body,
+  category,
+  createdAt,
+  upVotesBy,
+  downVotesBy,
+  totalComments,
+  user,
+  upVote,
+  downVote,
+  neutralVote,
+  authUser,
 }) {
   const isUpVoteThread = upVotesBy.includes(authUser);
   const isDownVoteThread = downVotesBy.includes(authUser);
@@ -35,9 +44,11 @@ function Item({
           </a>
         </header>
         <article>
-          <p className="thread-item__text">
-            {body.replace(/<[^>]+>/g, '').substring(0, 200)}
-          </p>
+          {
+          body.length < 280
+            ? <Markup content={body} className="thread-item__text" />
+            : <Markup content={`${body.substring(0, 280)}...`} className="thread-item__text" />
+          }
           <div className="thread-item__action">
             <div>
               <button type="button" className="btn__action" onClick={onUpVoteClick} aria-label="up vote">

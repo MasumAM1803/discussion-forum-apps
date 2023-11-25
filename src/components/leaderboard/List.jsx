@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import Item, { threadItemShape } from './Item';
 
 function List({ leaderboards }) {
   return (
@@ -11,7 +10,7 @@ function List({ leaderboards }) {
       </div>
       {
          leaderboards.map((leaderboard) => (
-           <div className="standing-item">
+           <div key={leaderboard.user.id} className="standing-item">
              <div className="user-profile">
                <img src={leaderboard.user.avatar} alt={leaderboard.user.name} />
                <h4>{leaderboard.user.name}</h4>

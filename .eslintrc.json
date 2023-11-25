@@ -24,6 +24,9 @@
         "import/no-unresolved": "off",
         "react/react-in-jsx-scope": "off",
         "react/button-has-type": "off",
-        "no-shadow":"off"
+        "no-shadow":"off",
+        "no-unused-expressions": "off",
+        "no-undef": "off",
+        "import/no-extraneous-dependencies": "off"
     }
 }

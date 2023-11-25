@@ -1,10 +1,9 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-undef */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
   FaRegThumbsDown, FaRegThumbsUp,
 } from 'react-icons/fa';
+import { Markup } from 'interweave';
 import Comment from './Comment';
 import { postedAt } from '../../utils';
 import CommentInput from './CommentInput';
@@ -54,9 +53,7 @@ function Detail({
         <h1 className="thread-item__user-title">{title}</h1>
       </header>
       <article>
-        <p className="thread-item__text">
-          {body.replace(/<[^>]+>/g, '').substring(0, 200)}
-        </p>
+        <Markup content={body} className="thread-item__text" />
         <div className="thread-item__action">
           <div>
             <button type="button" className="btn__action" onClick={onUpVoteClick} aria-label="up vote">
