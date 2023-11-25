@@ -17,14 +17,14 @@ function receiveThreadsActionCreator(threads) {
   };
 }
 
-// function addThreadActionCreator(thread) {
-//   return {
-//     type: ActionType.ADD_THREAD,
-//     payload: {
-//       thread,
-//     },
-//   };
-// }
+function addThreadActionCreator(thread) {
+  return {
+    type: ActionType.ADD_THREAD,
+    payload: {
+      thread,
+    },
+  };
+}
 
 function upVoteThreadActionCreator({ threadId, userId }) {
   return {
@@ -56,16 +56,16 @@ function neutralVoteThreadActionCreator({ threadId, userId }) {
   };
 }
 
-// function asyncAddThread({ text, replyTo = '' }) {
-//   return async (dispatch) => {
-//     try {
-//       const thread = await api.createThread({ text, replyTo });
-//       dispatch(addThreadActionCreator(thread));
-//     } catch (error) {
-//       alert(error.message);
-//     }
-//   };
-// }
+function asyncAddThread({ title, body, category = '' }) {
+  return async (dispatch) => {
+    try {
+      const thread = await api.createThread({ title, body, category });
+      dispatch(addThreadActionCreator(thread));
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
 
 function asyncNeutralVoteThread(threadId) {
   return async (dispatch, getState) => {
@@ -113,11 +113,11 @@ function asyncDownVoteThread(threadId) {
 export {
   ActionType,
   receiveThreadsActionCreator,
-  // addThreadActionCreator,
+  addThreadActionCreator,
   upVoteThreadActionCreator,
   downVoteThreadActionCreator,
   neutralVoteThreadActionCreator,
-  // asyncAddThread,
+  asyncAddThread,
   asyncUpVoteThread,
   asyncDownVoteThread,
   asyncNeutralVoteThread,

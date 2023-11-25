@@ -136,30 +136,31 @@ const api = (() => {
     return detailThread;
   }
 
-  // async function createThread({ text, replyTo = '' }) {
-  //   const response = await _fetchWithAuth(`${BASE_URL}/threads`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       text,
-  //       replyTo,
-  //     }),
-  //   });
+  async function createThread({ title, body, category = '' }) {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title,
+        body,
+        category,
+      }),
+    });
 
-  //   const responseJson = await response.json();
+    const responseJson = await response.json();
 
-  //   const { status, message } = responseJson;
+    const { status, message } = responseJson;
 
-  //   if (status !== 'success') {
-  //     throw new Error(message);
-  //   }
+    if (status !== 'success') {
+      throw new Error(message);
+    }
 
-  //   const { data: { thread } } = responseJson;
+    const { data: { thread } } = responseJson;
 
-  //   return thread;
-  // }
+    return thread;
+  }
 
   async function upVoteThread(id) {
     const response = await _fetchWithAuth(`${BASE_URL}/threads/${id}/up-vote`, {
@@ -171,7 +172,7 @@ const api = (() => {
 
     const responseJson = await response.json();
 
-    const { status, message, data } = responseJson;
+    const { status, message } = responseJson;
 
     if (status !== 'success') {
       throw new Error(message);
@@ -220,7 +221,7 @@ const api = (() => {
     getOwnProfile,
     getAllUsers,
     getAllThreads,
-    // createThread,
+    createThread,
     getThreadDetail,
     upVoteThread,
     downVoteThread,

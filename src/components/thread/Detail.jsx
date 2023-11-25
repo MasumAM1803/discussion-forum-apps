@@ -78,7 +78,7 @@ Detail.propTypes = {
   category: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   owner: PropTypes.shape(userShape).isRequired,
-  comments: PropTypes.arrayOf(PropTypes.object).isRequired,
+  comments: PropTypes.arrayOf(PropTypes.string).isRequired,
   upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   // authUser: PropTypes.string.isRequired,

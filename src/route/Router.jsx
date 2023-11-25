@@ -1,14 +1,16 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Home from '../pages/Home';
+import HomePage from '../pages/Home';
 import NotFound from '../pages/NotFound';
-import Detail from '../pages/thread/Detail';
+import DetailPage from '../pages/thread/Detail';
+import AddPage from '../pages/thread/Add';
 
 function Router() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/threads/:id" element={<Detail />} />
+      <Route path="/" element={<HomePage />} />
+      <Route path="/threads/:id" element={<DetailPage />} />
+      <Route path="/threads/new" element={<AddPage />} />
       <Route path="/*" element={<NotFound />} />
     </Routes>
   );

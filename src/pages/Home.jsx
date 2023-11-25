@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { FiPlusCircle } from 'react-icons/fi';
 import { asyncPopulateUsersAndThreads } from '../states/shared/action';
 import List from '../components/thread/List';
 import { asyncDownVoteThread, asyncNeutralVoteThread, asyncUpVoteThread } from '../states/threads/action';
+import { Link } from 'react-router-dom';
 
 function HomePage() {
   const {
@@ -48,6 +50,9 @@ function HomePage() {
         downVote={onDownVote}
         neutralVote={onNeutralVote}
       />
+      <Link to="/threads/new">
+        <button type="button" className="add-new-page__action" aria-label="add"><FiPlusCircle /></button>
+      </Link>
     </section>
   );
 }
