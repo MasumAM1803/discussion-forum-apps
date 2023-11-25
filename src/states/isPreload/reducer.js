@@ -1,6 +1,3 @@
-/**
- * @TODO: Define reducer for the isPreLoad state
- */
 import { ActionType } from './action';
 
 function isPreloadReducer(isPreload = true, action = {}) {
