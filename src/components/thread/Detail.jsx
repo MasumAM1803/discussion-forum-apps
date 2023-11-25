@@ -47,29 +47,26 @@ function Detail({
 
   return (
     <section className="thread-detail">
-      <header style={{ display: 'block' }}>
-        <div style={{
-          padding: '4px 5px', border: '1px solid black', borderRadius: '5px', width: 'fit-content',
-        }}
-        >
+      <header>
+        <div className="badge">
           {category}
         </div>
-        <h1 className="">{title}</h1>
+        <h1 className="thread-item__user-title">{title}</h1>
       </header>
       <article>
         <p className="thread-item__text">
           {body.replace(/<[^>]+>/g, '').substring(0, 200)}
         </p>
-        <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+        <div className="thread-item__action">
           <div>
-            <button type="button" onClick={onUpVoteClick} aria-label="up vote">
+            <button type="button" className="btn__action" onClick={onUpVoteClick} aria-label="up vote">
               <FaRegThumbsUp />
             </button>
             {' '}
             {upVotesBy.length}
           </div>
           <div>
-            <button type="button" onClick={onDownVoteClick} aria-label="down vote">
+            <button type="button" className="btn__action" onClick={onDownVoteClick} aria-label="down vote">
               <FaRegThumbsDown />
             </button>
             {' '}

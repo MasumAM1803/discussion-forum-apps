@@ -17,9 +17,6 @@ function RegisterPage() {
 
   return (
     <section className="register-page">
-      <header className="register-page__hero">
-        <h1><IoEarthOutline /></h1>
-      </header>
       <article className="register-page__main">
         <h2>Create your account</h2>
         <RegisterInput register={onRegister} />

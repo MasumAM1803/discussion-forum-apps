@@ -5,7 +5,7 @@
 }
 
 :root {
-  --accent-color: #00796b;
+  --accent-color: #2d3e50;
   --foreground-color: #0F1419;
   --background-color: white;
   --gray-dark-color: #66757F;
@@ -18,9 +18,28 @@ body {
   background-color: var(--background-color);
 }
 
+main {
+  padding: 64px 0;
+}
+
 .app-container {
-  max-width: 800px;
   margin: 0 auto;
+  height: 100vh;
+}
+
+.app-container > header {
+  background-color: #2d3e50;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+}
+
+.app-container header h2 {
+  color: #FFF;
+  font-size: 24px;
+  margin-left: 32px;
 }
 
 .loading {
@@ -28,9 +47,17 @@ body {
   top: 0;
 }
 
+.badge {
+  padding: 4px 5px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  width: fit-content;
+}
+
 .login-page, .register-page {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  width: 100%;
+  justify-content: center;
   min-height: 100vh;
 }
 
@@ -49,11 +76,13 @@ body {
   justify-content: center;
   flex-direction: column;
   padding: 64px;
+  min-width: 80%;
 }
 
 .login-page__main h2, .register-page h2 {
   font-weight: 300;
   font-size: 48px;
+  text-align: center;
 }
 
 .login-input input, .register-input input {
@@ -84,6 +113,10 @@ body {
 .home-page {
   width: 90%;
   margin: 0 auto;
+}
+
+.home-page h2 {
+  margin: 20px 0;
 }
 
 .navigation {
@@ -122,6 +155,9 @@ body {
 
 .threads-list {
   margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .thread-item {
@@ -130,7 +166,6 @@ body {
   gap: 10px;
   /* cursor: pointer; */
   border: 1px solid rgb(243, 243, 243);
-  border-bottom: 0;
 }
 
 .thread-item:last-of-type {
@@ -153,11 +188,35 @@ body {
 
 .thread-item__detail header {
   display: flex;
+  flex-direction: column;
+  gap: 12px;
   margin-bottom: 4px;
+}
+
+.thread-item__detail article,
+.thread-comment article {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.thread-item__action {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.thread-item__action button svg {
+  width: 16px;
+  height: 16px;
 }
 
 .thread-item__user-info {
   flex: 1;
+}
+
+.thread-item__detail .thread-item__user-title {
+  font-size: 18px;
 }
 
 .thread-item__detail .thread-item__created-at {
@@ -168,11 +227,6 @@ body {
 .thread-item__detail .thread-item__user-name {
   font-size: 15px;
   font-weight: 600;
-}
-
-.thread-item__detail .thread-item__user-id {
-  font-size: 15px;
-  color: var(--gray-dark-color);
 }
 
 .thread-item__detail .thread-item__text {
@@ -231,6 +285,66 @@ body {
   color: var(--gray-dark-color);
 }
 
+.add-new-page__action {
+  position: fixed;
+  display: flex;
+  gap: 16px;
+  bottom: 72px;
+  right: 32px;
+}
+
+.add-new-page__action > svg {
+  width: 40px;
+  height: 40px;
+  color: #2d3e50;
+}
+
+.add-new-page__action, .btn__action {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  min-height: 64px;
+  border-top: 1px solid #d1d5db;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFF;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.footer-btn {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: fit-content;
+  align-items: center;
+  color: #2d3e50;
+  text-decoration: none;
+}
+
+button.footer-btn {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+.footer-btn > svg {
+  width: 20px;
+  height: 20px;
+}
+
 .detail-page {
   width: 90%;
   margin: 0 auto;
@@ -250,9 +364,10 @@ body {
 
 .thread-detail header {
   display: flex;
+  flex-direction: column;
   gap: 12px;
   margin-bottom: 16px;
-  align-items: center;
+  justify-content: center;
 }
 
 .thread-detail header img {
@@ -290,13 +405,37 @@ body {
   cursor: pointer;
 }
 
+.thread-comment__header {
+  display: flex;
+  flex-direction: row !important;
+  justify-content: start !important;
+  align-items: center;
+}
+
+.thread-comment__createdAt {
+  width: fit-content;
+}
 
 .thread-reply-input {
   margin-top: 32px;
 }
 
-@media screen and (min-width: 850px) {
+.thread-comment__input button {
+  margin-top: 12px;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-profile img {
+  width: 30px !important;
+}
+
+/* @media screen and (min-width: 850px) {
   .login-page, .register-page {
     grid-template-columns: 1.25fr 1fr;
   }
-}
+} */

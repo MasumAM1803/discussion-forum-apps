@@ -34,28 +34,28 @@ function Comment({
   };
 
   return (
-    <section className="thread-detail">
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+    <section className="thread-detail thread-comment">
+      <header className="thread-comment__header">
+        <div className="user-profile">
           <img src={owner.avatar} alt={owner.name} />
           <h4>{owner.name}</h4>
         </div>
-        <div>{postedAt(createdAt)}</div>
+        <div className="thread-comment__createdAt">{postedAt(createdAt)}</div>
       </header>
       <article>
         <p className="thread-item__text">
           {content.replace(/<[^>]+>/g, '').substring(0, 200)}
         </p>
-        <div style={{ display: 'flex', gap: '20px' }}>
+        <div className="thread-item__action">
           <div>
-            <button type="button" onClick={onUpVoteCommentClick} aria-label="up vote">
+            <button type="button" className="btn__action" onClick={onUpVoteCommentClick} aria-label="up vote">
               <FaRegThumbsUp />
             </button>
             {' '}
             {upVotesBy.length}
           </div>
           <div>
-            <button type="button" onClick={onDownVoteCommentClick} aria-label="down vote">
+            <button type="button" className="btn__action" onClick={onDownVoteCommentClick} aria-label="down vote">
               <FaRegThumbsDown />
             </button>
             {' '}

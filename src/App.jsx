@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { LuMessagesSquare } from 'react-icons/lu';
+import { RiLogoutCircleRLine, RiLoginCircleLine } from 'react-icons/ri';
 import Router from './route/Router';
 import Loading from './components/Loading';
 import LoginPage from './pages/auth/Login';
@@ -47,12 +49,32 @@ function App() {
       <Loading />
       <div className="app-container">
         <header>
-          <Link to="/">Home</Link>
-          <button type="button" onClick={onSignOut}>Sign out</button>
+          <h2>Masum Forum App</h2>
         </header>
         <main>
           <Router />
         </main>
+        <footer>
+          <div className="footer-container">
+            <Link to="/" className="footer-btn">
+              <LuMessagesSquare />
+              Threads
+            </Link>
+            {authUser !== null
+              ? (
+                <button className="footer-btn" type="button" onClick={onSignOut}>
+                  <RiLogoutCircleRLine />
+                  Logout
+                </button>
+              )
+              : (
+                <Link to="/" className="footer-btn">
+                  <RiLoginCircleLine />
+                  Login
+                </Link>
+              )}
+          </div>
+        </footer>
       </div>
     </>
   );

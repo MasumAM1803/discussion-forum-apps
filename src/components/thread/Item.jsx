@@ -24,26 +24,23 @@ function Item({
   };
 
   return (
-    <div role="button" tabIndex={0} className="thread-item">
+    <div className="thread-item">
       <div className="thread-item__detail">
-        <header style={{ display: 'block' }}>
-          <div style={{
-            padding: '4px 5px', border: '1px solid black', borderRadius: '5px', width: 'fit-content',
-          }}
-          >
+        <header>
+          <div className="badge">
             {category}
           </div>
           <a href={`/threads/${id}`} className="thread-item__user-name">
-            <h4 className="">{title}</h4>
+            <h3 className="thread-item__user-title">{title}</h3>
           </a>
         </header>
         <article>
           <p className="thread-item__text">
             {body.replace(/<[^>]+>/g, '').substring(0, 200)}
           </p>
-          <div style={{ display: 'flex', gap: '20px' }}>
+          <div className="thread-item__action">
             <div>
-              <button type="button" onClick={onUpVoteClick} aria-label="up vote">
+              <button type="button" className="btn__action" onClick={onUpVoteClick} aria-label="up vote">
                 <FaRegThumbsUp />
               </button>
               {' '}
@@ -52,15 +49,13 @@ function Item({
               }
             </div>
             <div>
-              <button type="button" onClick={onDownVoteClick} aria-label="down vote">
+              <button type="button" className="btn__action" onClick={onDownVoteClick} aria-label="down vote">
                 <FaRegThumbsDown />
               </button>
               {' '}
-              {/* {downVotesBy.length} */}
               {
                 downVotesBy.length
               }
-              {/* { isUpVoteThread ? downVotesBy.length - 1 : downVotesBy.length} */}
             </div>
             <div>
               <FaRegCommentDots />

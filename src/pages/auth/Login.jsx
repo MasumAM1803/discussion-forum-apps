@@ -1,6 +1,5 @@
 /* eslint-disable import/named */
 import React from 'react';
-import { IoEarthOutline } from 'react-icons/io5';
 import { Link, Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { asyncSetAuthUser } from '../../states/authUser/action';
@@ -16,18 +15,9 @@ function LoginPage() {
 
   return (
     <section className="login-page">
-      <header className="login-page__hero">
-        <h1><IoEarthOutline /></h1>
-      </header>
       <article className="login-page__main">
         <h2>
-          Let&apos;s
-          {' '}
-          <strong>Talks</strong>
-          ,
-          {' '}
-          <br />
-          To Discuss in Here.
+          LOGIN HERE
         </h2>
 
         <LoginInput login={onLogin} />
