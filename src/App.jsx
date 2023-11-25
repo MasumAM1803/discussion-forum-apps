@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { LuMessagesSquare } from 'react-icons/lu';
+import { LuBarChart3, LuMessagesSquare } from 'react-icons/lu';
 import { RiLogoutCircleRLine, RiLoginCircleLine } from 'react-icons/ri';
 import Router from './route/Router';
 import Loading from './components/Loading';
@@ -61,7 +61,7 @@ function App() {
               Threads
             </Link>
             <Link to="/leaderboards" className="footer-btn">
-              <LuMessagesSquare />
+              <LuBarChart3 />
               Leaderboards
             </Link>
             {authUser !== null
