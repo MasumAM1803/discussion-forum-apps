@@ -23,6 +23,9 @@ function Detail({
   upVote,
   downVote,
   neutralVote,
+  upVoteComment,
+  downVoteComment,
+  neutralVoteComment,
   addComment,
 }) {
   const isUpVoteThread = upVotesBy.includes(authUser);
@@ -91,7 +94,15 @@ function Detail({
         </h2>
         {
          comments.map((comment) => (
-           <Comment key={comment.id} {...comment} />
+           <Comment
+             key={comment.id}
+             {...comment}
+             threadId={id}
+             authUser={authUser}
+             upVoteComment={upVoteComment}
+             downVoteComment={downVoteComment}
+             neutralVoteComment={neutralVoteComment}
+           />
          ))
       }
       </section>

@@ -7,6 +7,9 @@ const ActionType = {
   UP_VOTE_THREAD: 'UP_VOTE_THREAD',
   DOWN_VOTE_THREAD: 'DOWN_VOTE_THREAD',
   NEUTRAL_VOTE_THREAD: 'NEUTRAL_VOTE_THREAD',
+  UP_VOTE_COMMENT: 'UP_VOTE_COMMENT',
+  DOWN_VOTE_COMMENT: 'DOWN_VOTE_COMMENT',
+  NEUTRAL_VOTE_COMMENT: 'NEUTRAL_VOTE_COMMENT',
 };
 
 function receiveThreadDetailActionCreator(detailThread) {
@@ -58,6 +61,36 @@ function neutralVoteThreadActionCreator({ threadId, userId }) {
     type: ActionType.NEUTRAL_VOTE_THREAD,
     payload: {
       threadId,
+      userId,
+    },
+  };
+}
+
+function upVoteCommentActionCreator({ commentId, userId }) {
+  return {
+    type: ActionType.UP_VOTE_COMMENT,
+    payload: {
+      commentId,
+      userId,
+    },
+  };
+}
+
+function downVoteCommentActionCreator({ commentId, userId }) {
+  return {
+    type: ActionType.DOWN_VOTE_COMMENT,
+    payload: {
+      commentId,
+      userId,
+    },
+  };
+}
+
+function neutralVoteCommentActionCreator({ commentId, userId }) {
+  return {
+    type: ActionType.NEUTRAL_VOTE_COMMENT,
+    payload: {
+      commentId,
       userId,
     },
   };
@@ -128,6 +161,48 @@ function asyncDownVoteThread(threadId) {
   };
 }
 
+function asyncNeutralVoteComment(threadId, commentId) {
+  return async (dispatch, getState) => {
+    const { authUser } = getState();
+    dispatch(neutralVoteCommentActionCreator({ commentId, userId: authUser.id }));
+
+    try {
+      await api.neutralVoteComment(threadId, commentId);
+    } catch (error) {
+      alert(error.message);
+      dispatch(neutralVoteCommentActionCreator({ commentId, userId: authUser.id }));
+    }
+  };
+}
+
+function asyncUpVoteComment(threadId, commentId) {
+  return async (dispatch, getState) => {
+    const { authUser } = getState();
+    dispatch(upVoteCommentActionCreator({ commentId, userId: authUser.id }));
+
+    try {
+      await api.upVoteComment(threadId, commentId);
+    } catch (error) {
+      alert(error.message);
+      dispatch(asyncNeutralVoteComment(threadId, commentId));
+    }
+  };
+}
+
+function asyncDownVoteComment(threadId, commentId) {
+  return async (dispatch, getState) => {
+    const { authUser } = getState();
+    dispatch(downVoteCommentActionCreator({ commentId, userId: authUser.id }));
+
+    try {
+      await api.downVoteComment(threadId, commentId);
+    } catch (error) {
+      alert(error.message);
+      dispatch(asyncNeutralVoteComment(threadId, commentId));
+    }
+  };
+}
+
 export {
   ActionType,
   receiveThreadDetailActionCreator,
@@ -136,9 +211,15 @@ export {
   upVoteThreadActionCreator,
   downVoteThreadActionCreator,
   neutralVoteThreadActionCreator,
+  upVoteCommentActionCreator,
+  downVoteCommentActionCreator,
+  neutralVoteCommentActionCreator,
   asyncReceiveThreadDetail,
   asyncAddComment,
   asyncUpVoteThread,
   asyncDownVoteThread,
   asyncNeutralVoteThread,
+  asyncUpVoteComment,
+  asyncDownVoteComment,
+  asyncNeutralVoteComment,
 };

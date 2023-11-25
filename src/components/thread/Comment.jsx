@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-undef */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -6,10 +8,30 @@ import {
 import { postedAt } from '../../utils';
 
 function Comment({
-  // id, title, body, category, createdAt, upVotesBy, downVotesBy, comments, user,
-  content, createdAt, owner, upVotesBy, downVotesBy,
+  threadId,
+  id,
+  content,
+  createdAt,
+  owner,
+  upVotesBy,
+  downVotesBy,
+  upVoteComment,
+  downVoteComment,
+  neutralVoteComment,
+  authUser,
 }) {
-  // const isThreadLiked = likes.includes(authUser);
+  const isUpVoteComment = upVotesBy.includes(authUser);
+  const isDownVoteComment = downVotesBy.includes(authUser);
+
+  const onUpVoteCommentClick = (event) => {
+    event.stopPropagation();
+    isUpVoteComment ? neutralVoteComment(threadId, id) : upVoteComment(threadId, id);
+  };
+
+  const onDownVoteCommentClick = (event) => {
+    event.stopPropagation();
+    isDownVoteComment ? neutralVoteComment(threadId, id) : downVoteComment(threadId, id);
+  };
 
   return (
     <section className="thread-detail">
@@ -23,16 +45,19 @@ function Comment({
       <article>
         <p className="thread-item__text">
           {content.replace(/<[^>]+>/g, '').substring(0, 200)}
-          {/* {extractContent(body)} */}
         </p>
         <div style={{ display: 'flex', gap: '20px' }}>
           <div>
-            <FaRegThumbsUp />
+            <button type="button" onClick={onUpVoteCommentClick} aria-label="up vote">
+              <FaRegThumbsUp />
+            </button>
             {' '}
             {upVotesBy.length}
           </div>
           <div>
-            <FaRegThumbsDown />
+            <button type="button" onClick={onDownVoteCommentClick} aria-label="down vote">
+              <FaRegThumbsDown />
+            </button>
             {' '}
             {downVotesBy.length}
           </div>
@@ -48,14 +73,28 @@ const userShape = {
   avatar: PropTypes.string.isRequired,
 };
 
-Comment.propTypes = {
-//   id: PropTypes.string.isRequired,
+const commentItemShape = {
+  threadId: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   owner: PropTypes.shape(userShape).isRequired,
   upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
-  // authUser: PropTypes.string.isRequired,
+  authUser: PropTypes.string.isRequired,
+};
+
+Comment.propTypes = {
+  ...commentItemShape,
+  upVoteComment: PropTypes.func,
+  downVoteComment: PropTypes.func,
+  neutralVoteComment: PropTypes.func,
+};
+
+Comment.defaultProps = {
+  upVoteComment: null,
+  downVoteComment: null,
+  neutralVoteComment: null,
 };
 
 export default Comment;

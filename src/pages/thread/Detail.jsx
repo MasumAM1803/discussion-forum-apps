@@ -8,6 +8,9 @@ import {
   asyncDownVoteThread,
   asyncNeutralVoteThread,
   asyncUpVoteThread,
+  asyncUpVoteComment,
+  asyncDownVoteComment,
+  asyncNeutralVoteComment,
 } from '../../states/threadDetail/action';
 
 function Detail() {
@@ -39,6 +42,18 @@ function Detail() {
     dispatch(asyncNeutralVoteThread(id));
   };
 
+  const onUpVoteComment = (threadId, id) => {
+    dispatch(asyncUpVoteComment(threadId, id));
+  };
+
+  const onDownVoteComment = (threadId, id) => {
+    dispatch(asyncDownVoteComment(threadId, id));
+  };
+
+  const onNeutralVoteComment = (threadId, id) => {
+    dispatch(asyncNeutralVoteComment(threadId, id));
+  };
+
   if (!detailThread) {
     return null;
   }
@@ -52,6 +67,9 @@ function Detail() {
         upVote={onUpVote}
         downVote={onDownVote}
         neutralVote={onNeutralVote}
+        upVoteComment={onUpVoteComment}
+        downVoteComment={onDownVoteComment}
+        neutralVoteComment={onNeutralVoteComment}
       />
     </section>
   );
