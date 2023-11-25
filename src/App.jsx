@@ -60,6 +60,10 @@ function App() {
               <LuMessagesSquare />
               Threads
             </Link>
+            <Link to="/leaderboards" className="footer-btn">
+              <LuMessagesSquare />
+              Leaderboards
+            </Link>
             {authUser !== null
               ? (
                 <button className="footer-btn" type="button" onClick={onSignOut}>
