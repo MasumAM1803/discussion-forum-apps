@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import useInput from '../../../hooks/useInput';
 
 function LoginInput({ login }) {
-  const [email, onEmailChange] = useInput('test02@gmail.com');
-  const [password, onPasswordChange] = useInput('qwerty.123');
+  const [email, onEmailChange] = useInput('');
+  const [password, onPasswordChange] = useInput('');
 
   return (
     <form className="login-input">
