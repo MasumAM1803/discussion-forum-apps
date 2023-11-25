@@ -252,6 +252,16 @@ main {
   cursor: pointer;
 }
 
+.new-thread__input {
+  font-family: 'Open Sans', sans-serif;
+  width: 100%;
+  min-height: 30px;
+  background-color: var(--background-color);
+  border-color: var(--gray-light-color);
+  margin: 8px 0;
+  font-size: 15px;
+}
+
 .thread-input, .thread-reply-input {
   margin-bottom: 16px;
 }
@@ -265,6 +275,7 @@ main {
   height: 150px;
   resize: none;
   font-size: 15px;
+  margin-top: 8px;
 }
 
 .thread-input button, .thread-reply-input button {

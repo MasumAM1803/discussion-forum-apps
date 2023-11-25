@@ -9,8 +9,8 @@ function ThreadInput({ addThread }) {
 
   return (
     <form className="thread-input">
-      <input type="text" placeholder="Judul" value={title} onChange={handleTitleChange} />
-      <input type="text" placeholder="Kategori" value={category} onChange={handleCategoryChange} />
+      <input className="new-thread__input" type="text" placeholder="Judul" value={title} onChange={handleTitleChange} />
+      <input className="new-thread__input" type="text" placeholder="Kategori" value={category} onChange={handleCategoryChange} />
       <textarea type="text" placeholder="" value={body} onChange={handleBodyChange} />
       <p className="thread-input__char-left">
         <strong>{title.length}</strong>
