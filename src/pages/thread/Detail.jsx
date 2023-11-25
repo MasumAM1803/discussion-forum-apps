@@ -2,10 +2,13 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import ThreadDetail from '../../components/thread/Detail';
-import ThreadItem from '../../components/thread/Item';
-// import ThreadReplyInput from '../components/ThreadReplyInput';
-import { asyncReceiveThreadDetail } from '../../states/threadDetail/action';
-// import { asyncAddThread } from '../states/threads/action';
+import {
+  asyncAddComment,
+  asyncReceiveThreadDetail,
+  asyncDownVoteThread,
+  asyncNeutralVoteThread,
+  asyncUpVoteThread,
+} from '../../states/threadDetail/action';
 
 function Detail() {
   const { id } = useParams();
@@ -13,19 +16,28 @@ function Detail() {
     detailThread = null,
     authUser,
   } = useSelector((states) => states);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(asyncReceiveThreadDetail(id));
   }, [id, dispatch]);
 
-  // const onLikeThread = () => {
-  //   dispatch(asyncToogleLikeThreadDetail());
-  // };
+  const onAddComment = ({ content }) => {
+    dispatch(asyncAddComment({ id, content }));
+  };
 
-  // const onReplyThread = (text) => {
-  //   dispatch(asyncAddThread({ text, replyTo: id }));
-  // };
+  const onUpVote = (id) => {
+    dispatch(asyncUpVoteThread(id));
+  };
+
+  const onDownVote = (id) => {
+    dispatch(asyncDownVoteThread(id));
+  };
+
+  const onNeutralVote = (id) => {
+    dispatch(asyncNeutralVoteThread(id));
+  };
 
   if (!detailThread) {
     return null;
@@ -33,18 +45,14 @@ function Detail() {
 
   return (
     <section className="detail-page">
-      {
-        detailThread.parent && (
-          <div className="detail-page__parent">
-            <h3>Replying To</h3>
-            {/* <ThreadItem {...detailThread.parent} authUser={authUser.id} /> */}
-            <ThreadItem {...detailThread.parent} authUser={authUser.id} />
-          </div>
-        )
-      }
-      {/* <ThreadDetail {...detailThread} /> */}
-      <ThreadDetail {...detailThread} authUser={authUser.id} />
-      {/* <ThreadReplyInput replyThread={onReplyThread} /> */}
+      <ThreadDetail
+        {...detailThread}
+        authUser={authUser.id}
+        addComment={onAddComment}
+        upVote={onUpVote}
+        downVote={onDownVote}
+        neutralVote={onNeutralVote}
+      />
     </section>
   );
 }

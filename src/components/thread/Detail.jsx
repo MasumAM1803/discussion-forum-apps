@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-undef */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -5,12 +7,40 @@ import {
 } from 'react-icons/fa';
 import Comment from './Comment';
 import { postedAt } from '../../utils';
+import CommentInput from './CommentInput';
 
 function Detail({
-  // id, title, body, category, createdAt, upVotesBy, downVotesBy, comments, user,
-  id, title, body, category, createdAt, owner, upVotesBy, downVotesBy, comments,
+  id,
+  title,
+  body,
+  category,
+  createdAt,
+  owner,
+  upVotesBy,
+  downVotesBy,
+  comments,
+  authUser,
+  upVote,
+  downVote,
+  neutralVote,
+  addComment,
 }) {
-  // const isThreadLiked = likes.includes(authUser);
+  const isUpVoteThread = upVotesBy.includes(authUser);
+  const isDownVoteThread = downVotesBy.includes(authUser);
+
+  const onUpVoteClick = (event) => {
+    event.stopPropagation();
+    isUpVoteThread ? neutralVote(id) : upVote(id);
+  };
+
+  const onDownVoteClick = (event) => {
+    event.stopPropagation();
+    isDownVoteThread ? neutralVote(id) : downVote(id);
+  };
+
+  const onAddComment = ({ content }) => {
+    addComment({ content });
+  };
 
   return (
     <section className="thread-detail">
@@ -21,33 +51,29 @@ function Detail({
         >
           {category}
         </div>
-        <a href={`/threads/${id}`} className="thread-item__user-name">
-          <h4 className="">{title}</h4>
-        </a>
+        <h1 className="">{title}</h1>
       </header>
       <article>
         <p className="thread-item__text">
           {body.replace(/<[^>]+>/g, '').substring(0, 200)}
-          {/* {extractContent(body)} */}
         </p>
-        <div style={{ display: 'flex', gap: '20px' }}>
+        <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
           <div>
-            <FaRegThumbsUp />
+            <button type="button" onClick={onUpVoteClick} aria-label="up vote">
+              <FaRegThumbsUp />
+            </button>
             {' '}
             {upVotesBy.length}
           </div>
           <div>
-            <FaRegThumbsDown />
+            <button type="button" onClick={onDownVoteClick} aria-label="down vote">
+              <FaRegThumbsDown />
+            </button>
             {' '}
             {downVotesBy.length}
           </div>
-          {/* <div>
-            <FaRegCommentDots />
-            {' '}
-            {totalComments}
-          </div> */}
           <div>{postedAt(createdAt)}</div>
-          <div>
+          <div style={{ margin: '20px 0px' }}>
             Dibuat oleh
             {' '}
             <strong>{owner.name}</strong>
@@ -55,6 +81,14 @@ function Detail({
         </div>
       </article>
       <section>
+        <CommentInput addComment={onAddComment} />
+      </section>
+      <section>
+        <h2>
+          Komentar (
+          {comments.length}
+          )
+        </h2>
         {
          comments.map((comment) => (
            <Comment key={comment.id} {...comment} />
@@ -71,17 +105,40 @@ const userShape = {
   avatar: PropTypes.string.isRequired,
 };
 
-Detail.propTypes = {
+const commentShape = {
+  id: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
+  owner: PropTypes.shape(userShape).isRequired,
+  upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
+  downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+const threadItemShape = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   owner: PropTypes.shape(userShape).isRequired,
-  comments: PropTypes.arrayOf(PropTypes.string).isRequired,
+  comments: PropTypes.arrayOf(PropTypes.shape(commentShape)).isRequired,
   upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
-  // authUser: PropTypes.string.isRequired,
+  addComment: PropTypes.func.isRequired,
+  authUser: PropTypes.string.isRequired,
+};
+
+Detail.propTypes = {
+  ...threadItemShape,
+  upVote: PropTypes.func,
+  downVote: PropTypes.func,
+  neutralVote: PropTypes.func,
+};
+
+Detail.defaultProps = {
+  upVote: null,
+  downVote: null,
+  neutralVote: null,
 };
 
 export default Detail;

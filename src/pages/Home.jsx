@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FiPlusCircle } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 import { asyncPopulateUsersAndThreads } from '../states/shared/action';
 import List from '../components/thread/List';
 import { asyncDownVoteThread, asyncNeutralVoteThread, asyncUpVoteThread } from '../states/threads/action';
-import { Link } from 'react-router-dom';
 
 function HomePage() {
   const {
@@ -18,11 +18,6 @@ function HomePage() {
   useEffect(() => {
     dispatch(asyncPopulateUsersAndThreads());
   }, [dispatch]);
-
-  // const onAddTalk = (text) => {
-  //   // @TODO: dispatch async action to add talk
-
-  // };
 
   const onUpVote = (id) => {
     dispatch(asyncUpVoteThread(id));

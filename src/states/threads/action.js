@@ -2,7 +2,7 @@ import api from '../../utils/api';
 
 const ActionType = {
   RECEIVE_THREADS: 'RECEIVE_THREADS',
-  // ADD_THREAD: 'ADD_THREAD',
+  ADD_THREAD: 'ADD_THREAD',
   UP_VOTE_THREAD: 'UP_VOTE_THREAD',
   DOWN_VOTE_THREAD: 'DOWN_VOTE_THREAD',
   NEUTRAL_VOTE_THREAD: 'NEUTRAL_VOTE_THREAD',
@@ -90,7 +90,6 @@ function asyncUpVoteThread(threadId) {
       await api.upVoteThread(threadId);
     } catch (error) {
       alert(error.message);
-      // dispatch(neutralVoteThreadActionCreator({ threadId, userId: authUser.id }));
       dispatch(asyncNeutralVoteThread(threadId));
     }
   };

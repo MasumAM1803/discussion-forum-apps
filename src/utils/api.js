@@ -162,6 +162,30 @@ const api = (() => {
     return thread;
   }
 
+  async function createComment({ id, content }) {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads/${id}/comments`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        content,
+      }),
+    });
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    const { data: { comment } } = responseJson;
+
+    return comment;
+  }
+
   async function upVoteThread(id) {
     const response = await _fetchWithAuth(`${BASE_URL}/threads/${id}/up-vote`, {
       method: 'POST',
@@ -223,6 +247,7 @@ const api = (() => {
     getAllThreads,
     createThread,
     getThreadDetail,
+    createComment,
     upVoteThread,
     downVoteThread,
     neutralVoteThread,

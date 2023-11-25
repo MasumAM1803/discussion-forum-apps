@@ -5,41 +5,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FaRegThumbsUp, FaRegThumbsDown, FaRegCommentDots } from 'react-icons/fa';
-// import { useNavigate } from 'react-router-dom';
 import { postedAt } from '../../utils';
 
 function Item({
-  // id, title, body, category, createdAt, upVotesBy, ownerId, downVotesBy, totalComments, user, upVote, downVote, neutralVote
   id, title, body, category, createdAt, upVotesBy, downVotesBy, totalComments, user, upVote, downVote, neutralVote, authUser,
 }) {
-  // const navigate = useNavigate();
   const isUpVoteThread = upVotesBy.includes(authUser);
   const isDownVoteThread = downVotesBy.includes(authUser);
 
   const onUpVoteClick = (event) => {
     event.stopPropagation();
-    console.log(isUpVoteThread);
     isUpVoteThread ? neutralVote(id) : upVote(id);
   };
 
   const onDownVoteClick = (event) => {
     event.stopPropagation();
-    console.log(isDownVoteThread);
     isDownVoteThread ? neutralVote(id) : downVote(id);
   };
 
-  // const onThreadClick = () => {
-  //   navigate(`/threads/${id}`);
-  // };
-
-  // const onThreadPress = (event) => {
-  //   if (event.key === 'Enter' || event.key === ' ') {
-  //     navigate(`/threads/${id}`);
-  //   }
-  // };
-
   return (
-    // <div role="button" tabIndex={0} className="thread-item" onClick={onThreadClick} onKeyDown={onThreadPress}>
     <div role="button" tabIndex={0} className="thread-item">
       <div className="thread-item__detail">
         <header style={{ display: 'block' }}>
@@ -56,7 +40,6 @@ function Item({
         <article>
           <p className="thread-item__text">
             {body.replace(/<[^>]+>/g, '').substring(0, 200)}
-            {/* {extractContent(body)} */}
           </p>
           <div style={{ display: 'flex', gap: '20px' }}>
             <div>
