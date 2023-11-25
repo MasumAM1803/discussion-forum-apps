@@ -455,8 +455,16 @@ button.footer-btn {
   align-items: center;
 }
 
-/* @media screen and (min-width: 850px) {
-  .login-page, .register-page {
-    grid-template-columns: 1.25fr 1fr;
-  }
-} */
+.not-found__container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.not-found__container > img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

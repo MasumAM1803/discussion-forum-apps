@@ -1,4 +1,3 @@
-/* eslint-disable import/named */
 import React from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
