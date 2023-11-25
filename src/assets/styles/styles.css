@@ -255,7 +255,7 @@ main {
 .new-thread__input {
   font-family: 'Open Sans', sans-serif;
   width: 100%;
-  min-height: 30px;
+  min-height: 35px;
   background-color: var(--background-color);
   border-color: var(--gray-light-color);
   margin: 8px 0;
