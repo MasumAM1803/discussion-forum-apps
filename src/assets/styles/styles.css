@@ -45,6 +45,7 @@ main {
 .loading {
   position: sticky;
   top: 0;
+  z-index: 1001;
 }
 
 .badge {
@@ -443,6 +444,7 @@ button.footer-btn {
 
 .user-profile img {
   width: 30px !important;
+  border-radius: 50%;
 }
 
 .leaderboards-list {

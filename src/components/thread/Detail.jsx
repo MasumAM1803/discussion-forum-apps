@@ -70,10 +70,11 @@ function Detail({
             {downVotesBy.length}
           </div>
           <div>{postedAt(createdAt)}</div>
-          <div style={{ margin: '20px 0px' }}>
+          <div className="user-profile">
             Dibuat oleh
             {' '}
-            <strong>{owner.name}</strong>
+            <img src={owner.avatar} alt={owner.name} />
+            <h4>{owner.name}</h4>
           </div>
         </div>
       </article>

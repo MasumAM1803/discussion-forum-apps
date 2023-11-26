@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FaRegThumbsUp, FaRegThumbsDown, FaRegCommentDots } from 'react-icons/fa';
 import { Markup } from 'interweave';
+import { Link } from 'react-router-dom';
 import { postedAt } from '../../utils';
 
 function Item({
@@ -39,9 +40,9 @@ function Item({
           <div className="badge">
             {category}
           </div>
-          <a href={`/threads/${id}`} className="thread-item__user-name">
+          <Link to={`/threads/${id}`} className="thread-item__user-name">
             <h3 className="thread-item__user-title">{title}</h3>
-          </a>
+          </Link>
         </header>
         <article>
           {
