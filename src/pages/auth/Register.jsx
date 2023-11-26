@@ -8,9 +8,9 @@ function RegisterPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const onRegister = ({ name, email, password }) => {
-    dispatch(asyncRegisterUser({ email, name, password }));
-    navigate('/');
+  const onRegister = async ({ name, email, password }) => {
+    const issSuccess = await dispatch(asyncRegisterUser({ email, name, password }));
+    if (issSuccess) navigate('/');
   };
 
   return (
