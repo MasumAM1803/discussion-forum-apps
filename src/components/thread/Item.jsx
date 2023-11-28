@@ -4,6 +4,13 @@ import { FaRegThumbsUp, FaRegThumbsDown, FaRegCommentDots } from 'react-icons/fa
 import { Markup } from 'interweave';
 import { Link } from 'react-router-dom';
 import { postedAt } from '../../utils';
+import Card from '../styled/cards/Card';
+import CardHeader from '../styled/cards/CardHeader';
+import CardContent from '../styled/cards/CardContent';
+import CardFooter from '../styled/cards/CardFooter';
+import ButtonIcon from '../styled/buttons/ButtonIcon';
+import ButtonFlex from '../styled/buttons/ButtonFlex';
+import UserProfile from '../styled/UserProfile';
 
 function Item({
   id,
@@ -34,56 +41,56 @@ function Item({
   };
 
   return (
-    <div className="thread-item">
+    <Card>
       <div className="thread-item__detail">
-        <header>
+        <CardHeader>
           <div className="badge">
             {category}
           </div>
           <Link to={`/threads/${id}`} className="thread-item__user-name">
             <h3 className="thread-item__user-title">{title}</h3>
           </Link>
-        </header>
-        <article>
+        </CardHeader>
+        <CardContent>
           {
           body.length < 280
             ? <Markup content={body} className="thread-item__text" />
             : <Markup content={`${body.substring(0, 280)}...`} className="thread-item__text" />
           }
-          <div className="thread-item__action">
-            <div>
-              <button type="button" className="btn__action" onClick={onUpVoteClick} aria-label="up vote">
+          <CardFooter>
+            <ButtonFlex>
+              <ButtonIcon type="button" onClick={onUpVoteClick} aria-label="up vote">
                 <FaRegThumbsUp />
-              </button>
+              </ButtonIcon>
               {' '}
               {
                 upVotesBy.length
               }
-            </div>
-            <div>
-              <button type="button" className="btn__action" onClick={onDownVoteClick} aria-label="down vote">
+            </ButtonFlex>
+            <ButtonFlex>
+              <ButtonIcon type="button" onClick={onDownVoteClick} aria-label="down vote">
                 <FaRegThumbsDown />
-              </button>
+              </ButtonIcon>
               {' '}
               {
                 downVotesBy.length
               }
-            </div>
-            <div>
+            </ButtonFlex>
+            <ButtonFlex>
               <FaRegCommentDots />
               {' '}
               {totalComments}
-            </div>
+            </ButtonFlex>
             <div>{postedAt(createdAt)}</div>
-            <div>
+            <UserProfile>
               Dibuat oleh
               {' '}
               <strong>{user.name}</strong>
-            </div>
-          </div>
-        </article>
+            </UserProfile>
+          </CardFooter>
+        </CardContent>
       </div>
-    </div>
+    </Card>
   );
 }
 

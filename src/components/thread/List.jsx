@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Item, { threadItemShape } from './Item';
+import Container from '../styled/Container';
+import Flex from '../styled/Flex';
 
 function List({
   threads, upVote, downVote, neutralVote,
 }) {
   return (
-    <div className="threads-list">
-      {
+    <Container>
+      <Flex>
+        {
          threads.map((thread) => (
            <Item
              key={thread.id}
@@ -18,7 +21,8 @@ function List({
            />
          ))
       }
-    </div>
+      </Flex>
+    </Container>
   );
 }
 

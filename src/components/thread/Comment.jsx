@@ -4,6 +4,13 @@ import {
   FaRegThumbsDown, FaRegThumbsUp,
 } from 'react-icons/fa';
 import { postedAt } from '../../utils';
+import CardHeader from '../styled/cards/CardHeader';
+import CardContent from '../styled/cards/CardContent';
+import UserProfile from '../styled/UserProfile';
+import UserImage from '../styled/UserImage';
+import CardFooter from '../styled/cards/CardFooter';
+import ButtonFlex from '../styled/buttons/ButtonFlex';
+import ButtonIcon from '../styled/buttons/ButtonIcon';
 
 function Comment({
   threadId,
@@ -33,34 +40,34 @@ function Comment({
 
   return (
     <section className="thread-detail thread-comment">
-      <header className="thread-comment__header">
-        <div className="user-profile">
-          <img src={owner.avatar} alt={owner.name} />
+      <CardHeader inline style={{ justifyContent: 'space-between' }}>
+        <UserProfile>
+          <UserImage src={owner.avatar} alt={owner.name} />
           <h4>{owner.name}</h4>
-        </div>
+        </UserProfile>
         <div className="thread-comment__createdAt">{postedAt(createdAt)}</div>
-      </header>
-      <article>
+      </CardHeader>
+      <CardContent>
         <p className="thread-item__text">
           {content.replace(/<[^>]+>/g, '').substring(0, 200)}
         </p>
-        <div className="thread-item__action">
-          <div>
-            <button type="button" className="btn__action" onClick={onUpVoteCommentClick} aria-label="up vote">
+        <CardFooter>
+          <ButtonFlex>
+            <ButtonIcon type="button" className="btn__action" onClick={onUpVoteCommentClick} aria-label="up vote">
               <FaRegThumbsUp />
-            </button>
+            </ButtonIcon>
             {' '}
             {upVotesBy.length}
-          </div>
-          <div>
-            <button type="button" className="btn__action" onClick={onDownVoteCommentClick} aria-label="down vote">
+          </ButtonFlex>
+          <ButtonFlex>
+            <ButtonIcon type="button" className="btn__action" onClick={onDownVoteCommentClick} aria-label="down vote">
               <FaRegThumbsDown />
-            </button>
+            </ButtonIcon>
             {' '}
             {downVotesBy.length}
-          </div>
-        </div>
-      </article>
+          </ButtonFlex>
+        </CardFooter>
+      </CardContent>
     </section>
   );
 }

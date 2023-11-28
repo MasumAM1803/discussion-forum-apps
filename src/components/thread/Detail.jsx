@@ -7,6 +7,13 @@ import { Markup } from 'interweave';
 import Comment from './Comment';
 import { postedAt } from '../../utils';
 import CommentInput from './CommentInput';
+import UserProfile from '../styled/UserProfile';
+import CardHeader from '../styled/cards/CardHeader';
+import CardContent from '../styled/cards/CardContent';
+import CardFooter from '../styled/cards/CardFooter';
+import ButtonFlex from '../styled/buttons/ButtonFlex';
+import ButtonIcon from '../styled/buttons/ButtonIcon';
+import UserImage from '../styled/UserImage';
 
 function Detail({
   id,
@@ -46,38 +53,38 @@ function Detail({
 
   return (
     <section className="thread-detail">
-      <header>
+      <CardHeader>
         <div className="badge">
           {category}
         </div>
         <h1 className="thread-item__user-title">{title}</h1>
-      </header>
-      <article>
+      </CardHeader>
+      <CardContent>
         <Markup content={body} className="thread-item__text" />
-        <div className="thread-item__action">
-          <div>
-            <button type="button" className="btn__action" onClick={onUpVoteClick} aria-label="up vote">
+        <CardFooter>
+          <ButtonFlex>
+            <ButtonIcon type="button" onClick={onUpVoteClick} aria-label="up vote">
               <FaRegThumbsUp />
-            </button>
+            </ButtonIcon>
             {' '}
             {upVotesBy.length}
-          </div>
-          <div>
-            <button type="button" className="btn__action" onClick={onDownVoteClick} aria-label="down vote">
+          </ButtonFlex>
+          <ButtonFlex>
+            <ButtonIcon type="button" className="btn__action" onClick={onDownVoteClick} aria-label="down vote">
               <FaRegThumbsDown />
-            </button>
+            </ButtonIcon>
             {' '}
             {downVotesBy.length}
-          </div>
+          </ButtonFlex>
           <div>{postedAt(createdAt)}</div>
-          <div className="user-profile">
+          <UserProfile>
             Dibuat oleh
             {' '}
-            <img src={owner.avatar} alt={owner.name} />
+            <UserImage src={owner.avatar} alt={owner.name} />
             <h4>{owner.name}</h4>
-          </div>
-        </div>
-      </article>
+          </UserProfile>
+        </CardFooter>
+      </CardContent>
       <section>
         <CommentInput addComment={onAddComment} />
       </section>

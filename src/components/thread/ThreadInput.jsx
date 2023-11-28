@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import useInput from '../../hooks/useInput';
+import InputField from '../styled/InputField';
+import TextArea from '../styled/TextArea';
 
 function ThreadInput({ addThread }) {
   const [title, handleTitleChange] = useInput('');
@@ -9,11 +11,11 @@ function ThreadInput({ addThread }) {
 
   return (
     <form className="thread-input">
-      <input className="new-thread__input" type="text" placeholder="Judul" value={title} onChange={handleTitleChange} />
-      <input className="new-thread__input" type="text" placeholder="Kategori" value={category} onChange={handleCategoryChange} />
-      <textarea type="text" placeholder="" value={body} onChange={handleBodyChange} />
+      <InputField type="text" placeholder="Judul" value={title} onChange={handleTitleChange} />
+      <InputField type="text" placeholder="Kategori" value={category} onChange={handleCategoryChange} />
+      <TextArea type="text" placeholder="" value={body} onChange={handleBodyChange} />
       <p className="thread-input__char-left">
-        <strong>{title.length}</strong>
+        <strong>{body.length}</strong>
         /320
       </p>
       <button type="submit" onClick={() => addThread({ title, body, category })}>Thread</button>

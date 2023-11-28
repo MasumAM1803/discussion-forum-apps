@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import useInput from '../../../hooks/useInput';
+import InputField from '../../styled/InputField';
 
 function RegisterInput({ register }) {
   const [name, onNameChange] = useInput('');
@@ -9,9 +10,9 @@ function RegisterInput({ register }) {
 
   return (
     <form className="register-input">
-      <input type="text" value={name} onChange={onNameChange} placeholder="Name" />
-      <input type="text" value={email} onChange={onEmailChange} placeholder="Email" />
-      <input type="password" value={password} onChange={onPasswordChange} placeholder="Password" />
+      <InputField type="text" value={name} onChange={onNameChange} placeholder="Name" />
+      <InputField type="text" value={email} onChange={onEmailChange} placeholder="Email" />
+      <InputField type="password" value={password} onChange={onPasswordChange} placeholder="Password" />
       <button type="button" onClick={() => register({ name, email, password })}>Register</button>
     </form>
   );
