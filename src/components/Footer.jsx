@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 function Footer({ authUser, onSignOut }) {
   return (
     <footer>
-      <div className="footer-container">
+      <nav className="footer-container">
         <Link to="/" className="footer-btn">
           <LuMessagesSquare />
           Threads
@@ -29,7 +29,7 @@ function Footer({ authUser, onSignOut }) {
               Login
             </Link>
           )}
-      </div>
+      </nav>
     </footer>
   );
 }
