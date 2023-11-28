@@ -39,7 +39,7 @@ function HomePage() {
 
   return (
     <section className="home-page">
-      <h2>Diskusi tersedia</h2>
+      <h2>Diskusi Tersedia</h2>
       <List
         threads={threadList}
         upVote={onUpVote}
