@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import useInput from '../../../hooks/useInput';
+import InputField from '../../styled/InputField';
 
 function LoginInput({ login }) {
   const [email, onEmailChange] = useInput('');
@@ -8,8 +9,8 @@ function LoginInput({ login }) {
 
   return (
     <form className="login-input">
-      <input type="text" value={email} onChange={onEmailChange} placeholder="Email" />
-      <input type="password" value={password} onChange={onPasswordChange} placeholder="Password" />
+      <InputField type="text" value={email} onChange={onEmailChange} placeholder="Email" />
+      <InputField type="password" value={password} onChange={onPasswordChange} placeholder="Password" />
       <button type="button" onClick={() => login({ email, password })}>Login</button>
     </form>
   );
