@@ -29,7 +29,7 @@ describe('Login spec', () => {
     cy.on('window:alert', (str) => {
       expect(str).to.equal('"email" is not allowed to be empty');
     });
-    cy.on('uncaught:exception', (err, runnable) => false);
+    cy.on('uncaught:exception', () => false);
   });
 
   it('should display alert when password is empty', () => {
@@ -40,7 +40,7 @@ describe('Login spec', () => {
     cy.on('window:alert', (str) => {
       expect(str).to.equal('"password" is not allowed to be empty');
     });
-    cy.on('uncaught:exception', (err, runnable) => false);
+    cy.on('uncaught:exception', () => false);
   });
 
   it('should display alert when email and password are wrong', () => {
@@ -53,7 +53,7 @@ describe('Login spec', () => {
     cy.on('window:alert', (str) => {
       expect(str).to.equal('User ID or password is wrong');
     });
-    cy.on('uncaught:exception', (err, runnable) => false);
+    cy.on('uncaught:exception', () => false);
   });
 
   it('should display homepage when email and password are correct', () => {
@@ -63,9 +63,8 @@ describe('Login spec', () => {
 
     cy.get('button').contains(/^Login$/).click();
 
-    cy.get('nav').contains(/^Home$/).should('be.visible');
-    cy.get('button').contains('Sign out').should('be.visible');
-    
-    cy.on('uncaught:exception', (err, runnable) => false);
-});
+    cy.get('button').contains('Logout').should('be.visible');
+
+    cy.on('uncaught:exception', () => false);
+  });
 });

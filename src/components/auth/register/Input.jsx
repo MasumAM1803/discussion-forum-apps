@@ -12,7 +12,7 @@ function RegisterInput({ register }) {
       <input type="text" value={name} onChange={onNameChange} placeholder="Name" />
       <input type="text" value={email} onChange={onEmailChange} placeholder="Email" />
       <input type="password" value={password} onChange={onPasswordChange} placeholder="Password" />
-      <button type="submit" onClick={() => register({ name, email, password })}>Register</button>
+      <button type="button" onClick={() => register({ name, email, password })}>Register</button>
     </form>
   );
 }
