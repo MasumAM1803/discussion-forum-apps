@@ -4,16 +4,21 @@ import useInput from '../../hooks/useInput';
 import TextArea from '../styled/TextArea';
 
 function CommentInput({ addComment }) {
-  const [content, handleContentChange] = useInput('');
+  const [content, handleContentChange, setContent] = useInput('');
+
+  function addcomment() {
+    addComment({ content });
+    setContent('');
+  }
 
   return (
     <form className="thread-input thread-comment__input">
-      <TextArea type="text" placeholder="" value={content} onChange={handleContentChange} />
+      <TextArea id="comment-input" type="text" placeholder="" value={content} onChange={handleContentChange} />
       <p className="thread-input__char-left">
         <strong>{content.length}</strong>
         /320
       </p>
-      <button type="submit" onClick={() => addComment({ content })}>Kirim</button>
+      <button type="button" onClick={addcomment}>Kirim</button>
     </form>
   );
 }
