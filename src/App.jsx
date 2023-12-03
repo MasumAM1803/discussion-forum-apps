@@ -5,6 +5,7 @@ import Router from './route/Router';
 import Loading from './components/Loading';
 import LoginPage from './pages/auth/Login';
 import RegisterPage from './pages/auth/Register';
+import Main from './components/styled/Main';
 import { asyncPreloadProcess } from './states/isPreload/action';
 import { asyncUnsetAuthUser } from './states/authUser/action';
 import Footer from './components/Footer';
@@ -33,12 +34,14 @@ function App() {
     return (
       <>
         <Loading />
-        <main>
-          <Routes>
-            <Route path="/*" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-          </Routes>
-        </main>
+        <div className="app-container">
+          <Main auth>
+            <Routes>
+              <Route path="/*" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+            </Routes>
+          </Main>
+        </div>
       </>
     );
   }
@@ -50,9 +53,9 @@ function App() {
         <header>
           <h2>Masum Forum App</h2>
         </header>
-        <main>
+        <Main>
           <Router />
-        </main>
+        </Main>
         <Footer authUser={authUser} onSignOut={onSignOut} />
       </div>
     </>
